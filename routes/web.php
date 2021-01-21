@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,22 +16,27 @@ use Illuminate\Http\Request;
 // GET,POST,PUT,DELETE
 
 
-Route::prefix('archivos')->group(function(){
+//Route::get('/archivos',[FilesController::class,'index']); #Forma 1
 
-    Route::get('create',function(){
+Route::get('/archivos','FilesController@index')->name('archivos.index');
+Route::post('/archivos','FilesController@store');
 
-    });
-    Route::get('edit/{archivoId}',function($archivoId){
-        return "El id del archivo es: {$archivoId}";
-    })->where('archivoId', '[0-9]+');
+// Route::prefix('archivos')->group(function(){
 
-});
-Route::redirect("/","/home");
+//     Route::get('create',function(){
 
-Route::get('/home', function () {
-    return view('files.index');
-});
-Route::delete('/datos',function(Request $request){
-    return $request->all();
-});
+//     });
+//     Route::get('edit/{archivoId}',function($archivoId){
+//         return "El id del archivo es: {$archivoId}";
+//     })->where('archivoId', '[0-9]+');
+
+// });
+// Route::redirect("/","/home");
+
+// Route::get('/home', function () {
+//     return view('files.index');
+// });
+// Route::delete('/datos',function(Request $request){
+//     return $request->all();
+// });
 

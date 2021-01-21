@@ -6,11 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="{{url('/datos')}}" method="POST">
+    <form action="{{url('/archivos')}}" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('DELETE')
-        <label for="">Nombre:</label>
-        <input type="text" name="nombre" />
+        <label for="">Nombre:</label><br>
+        <input type="text" name="nombre" /><br>
+        <label for="">Archivos:</label><br>
+        <input type="file" name="archivos"/><br>
         <button type="submit">Enviar</button>
     </form>
 </body>
