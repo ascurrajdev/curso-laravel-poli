@@ -18,8 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 //Route::get('/archivos',[FilesController::class,'index']); #Forma 1
 
-Route::get('/archivos','FilesController@index')->name('archivos.index');
-Route::post('/archivos','FilesController@store');
+//Route::get('/archivos','FilesController@index')->name('archivos.index');
+//Route::post('/archivos','FilesController@store');
+Route::resource('/archivos','ArchivosController');
+
 
 // Route::prefix('archivos')->group(function(){
 
