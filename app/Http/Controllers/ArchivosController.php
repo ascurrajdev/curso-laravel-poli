@@ -16,7 +16,10 @@ class ArchivosController extends Controller
      */
     public function index()
     {
-        return view("archivos.index");
+        $archivos = Archivo::all();
+        return view("archivos.index",array(
+            "archivos" => $archivos
+        ));
     }
 
     /**
@@ -53,7 +56,7 @@ class ArchivosController extends Controller
      */
     public function show(Archivo $archivo)
     {
-        //
+        return $archivo;
     }
 
     /**
@@ -64,7 +67,9 @@ class ArchivosController extends Controller
      */
     public function edit(Archivo $archivo)
     {
-        //
+        return view("archivos.edit",array(
+            "archivo" => $archivo
+        ));
     }
 
     /**
@@ -76,7 +81,12 @@ class ArchivosController extends Controller
      */
     public function update(Request $request, Archivo $archivo)
     {
-        //
+        $path = Storage::disk('public')->putFile('archivos', new File($request->archivo->path()));
+        $archivo->nombre = $request->archivo->getClientOriginalName();
+        $archivo->extension = $request->archivo->extension();
+        $archivo->url = $path;
+        $archivo->save();
+        return $archivo;
     }
 
     /**
@@ -87,6 +97,7 @@ class ArchivosController extends Controller
      */
     public function destroy(Archivo $archivo)
     {
-        //
+        $archivo->forceDelete();
+        return $archivo;
     }
 }
