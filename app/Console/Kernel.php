@@ -4,7 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-
+use Log;
 class Kernel extends ConsoleKernel
 {
     /**
@@ -24,7 +24,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call(function(){
+            Log::info("Se esta ejecutando la tarea programada dentro de la funcion anonima");
+        })->everyMinute();
+
+        $schedule->command('prueba-task:work')->everyMinute();
     }
 
     /**
